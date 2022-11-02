@@ -1,0 +1,41 @@
+<% if @gossip.errors.any? %>
+  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @gossip.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%# title %>
+<div class="text-center py-5">
+  <h1>Créer un nouveau Gossip</h1>
+</div>
+
+<%# Formulaire %>
+<div class="d-flex h-100 justify-content-center align-items-center">
+<div class="card text-center d-flex w-50">
+
+  <div class="card-header">
+  <%= form_tag url_for(action: 'create'), method: "post" do %>
+    <%= label_tag 'titre du gossip' %> <br>
+  </div>
+
+  <div class="card-body">
+    <%= text_field_tag 'title' %>
+  </div>
+
+  <div class="card-header">
+  <%= label_tag 'Description de ton gossip' %> <br>
+  </div>
+
+  <div class="card-body">
+  <%= text_area_tag 'content' %>
+  </div>
+
+
+  <%= submit_tag "Soumet ton gossip" %>
+  <% end %>
+
+</div> 
+</div>

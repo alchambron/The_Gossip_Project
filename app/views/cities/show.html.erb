@@ -1,0 +1,25 @@
+<div class="text-center my-4">
+<h1><%= @city.name %></h1>
+</div>
+
+
+<div class="container-fluid">
+<div class="d-flex justify-content-center row mx-2 row-cols-5">
+  
+
+<% @gossips.each do |x| %>
+  <% if x.user.city_id == @city.id %>
+    <div class="col card mx-5 my-5 container-fluid" style="width: 18rem;">
+
+        <div class="card-body card-deck">
+          <h5 class="card-title">Gossip n° : <%=x.id%></h5><%#  Show the id of each gossip %>
+          <h6 class="card-subtitle mb-2 text-muted"><%= x.title %></h6> <%# Show the first name of the gossip writer  %>
+          <p class="card-text"><%= x.content %></p> <%# Show the title of the gossip %>
+        </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+</div>  
+</div>

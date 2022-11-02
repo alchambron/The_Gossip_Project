@@ -6,7 +6,7 @@
 <div class="mx-4">
   
 <h4>Ecrit par <a href="/users/<%= @gossips.user.id %>"><%= @gossips.user.first_name%></a></h2>
-<h6>Ville de l'auteur : <%= @gossips.user.city.name %></h6>
+<h6>Ville de l'auteur : <a href="/cities/<%=@gossips.user.city.id%>"><%= @gossips.user.city.name %></a></h6>
 <hr>
 <h5><p>Titre: <%= @gossips.title %></p></h5>
 <p><%= @gossips.content %></p>

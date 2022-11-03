@@ -13,10 +13,16 @@
 <hr>
 <p>Date de création : <%= @gossip.created_at  %></p>
 <hr>
-<p><%= button_to "Editer Gossip", edit_gossip_path, :method => "get"%></p>
-<p><%= button_to "Delete Gossip", gossip_path(@gossip), :method => "delete" %></p>
+
+<%# Check if the user is logged and the creator of the content %>
+<% if session[:user_id] == @gossip.user_id %>
+  <p><%= button_to "Editer Gossip", edit_gossip_path, :method => "get"%></p>
+  <p><%= button_to "Delete Gossip", gossip_path(@gossip), :method => "delete" %></p>
+<% end %>
 <br>
+<% if session[:user_id] %>
 <p><%= button_to "Commenter Gossip", new_gossip_comment_path(@gossip.id), :method => "get" %></p>
+<% end %>
 <hr>
 
 <% @gossip.comments.sort.each do |x| %>
@@ -24,7 +30,9 @@
     <div class="card-body">
       <h5 class="card-title"><%= x.content %></h5>
       <p>Ecrit par : <%= link_to "#{x.user.first_name}", user_path(x.user.id) %></p>
+        <% if session[:user_id] == x.user_id %>
       <%= button_to "Modifier ou supprimer ce commentaire", edit_gossip_comment_path(@gossip.id, x.id), :method => "get" %>
+       <% end %>
     </div>
   </div>
 <% end %>

@@ -14,7 +14,9 @@
         <div class="card-body card-deck">
           <h5 class="card-title">Gossip n° : <%=x.id%></h5><%#  Show the id of each gossip %>
           <h6 class="card-subtitle mb-2 text-muted"><%= x.title %></h6> <%# Show the first name of the gossip writer  %>
+        <% if session[:user_id] %>
           <p class="card-text"><%= x.content %></p> <%# Show the title of the gossip %>
+        <% end %>
         </div>
     </div>
   <% end %>

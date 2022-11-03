@@ -1,5 +1,5 @@
 class GossipsController < ApplicationController
-  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_user, only: [:new, :create, :show]
 
   # Show all the gossip in the index.html
   def index

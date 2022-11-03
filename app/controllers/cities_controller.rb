@@ -21,4 +21,5 @@ class CitiesController < ApplicationController
 
   def destroy
   end
+
 end

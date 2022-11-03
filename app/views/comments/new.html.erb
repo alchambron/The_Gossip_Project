@@ -1,9 +1,23 @@
-<h1>New comment</h1>
+<div class="text-center py-5">
+  <h1>Créer un commentaire</h1>
+</div>
 
-<%= render "form", comment: @comment %>
+<div class="d-flex h-100 justify-content-center align-items-center">
+  <div class="card text-center d-flex w-50">
+    
+    <div class= "card-header">
+      %<%= form_tag url_for(action: 'create'), method: "post" do %>
+      <%= label_tag 'Votre commentaire' %>
+    </div>
 
-<br>
+    <div class= "card-body">
+      <%= text_area_tag 'content' %>
+    </div>
 
-<div>
-  <%= link_to "Back to comments", comments_path %>
+    <%= submit_tag 'Soumet ton commentaire' %>
+      
+    <% end %>
+    
+  </div>
+  
 </div>

@@ -13,8 +13,20 @@
 <hr>
 <p>Date de création : <%= @gossip.created_at  %></p>
 <hr>
-<a href="/gossips/<%=@gossip.id%>/edit">Editer votre Gossip</a>
 <p><%= button_to "Editer Gossip", edit_gossip_path, :method => "get"%></p>
 <p><%= button_to "Delete Gossip", gossip_path(@gossip), :method => "delete" %></p>
+<br>
+<p><%= button_to "Commenter Gossip", new_gossip_comment_path(@gossip.id), :method => "get" %></p>
+<hr>
+
+<% @gossip.comments.sort.each do |x| %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= x.content %></h5>
+      <p>Ecrit par : <%= link_to "#{x.user.first_name}", user_path(x.user.id) %></p>
+      <%= button_to "Modifier ou supprimer ce commentaire", edit_gossip_comment_path(@gossip.id, x.id), :method => "get" %>
+    </div>
+  </div>
+<% end %>
 
 </div>

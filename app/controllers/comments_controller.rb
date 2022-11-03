@@ -1,70 +1,56 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
-
-  # GET /comments or /comments.json
+  
   def index
-    @comments = Comment.all
   end
 
-  # GET /comments/1 or /comments/1.json
   def show
   end
 
-  # GET /comments/new
   def new
     @comment = Comment.new
+    puts params
   end
 
-  # GET /comments/1/edit
-  def edit
-  end
-
-  # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    puts params
+    @comment = Comment.new(content: params[:content], user_id: User.all.sample.id, gossip_id: params[:gossip_id]) # avec xxx qui sont les données obtenues à partir du formulaire
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully created." }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.save # essaie de sauvegarder en base @gossip
+      puts params
+      # si ça marche, il redirige vers la page d'index du site
+      redirect_to Gossip.find(params[:gossip_id])
+    else
+      puts params
+      # sinon, il render la view new (qui est celle sur laquelle on est déjà)
+      redirect_to "/"
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
+  def edit
+    @comment = Comment.find(params[:id]) 
+  end
+
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    @comment = Comment.find(params[:id])
+
+    if @comment.update(content: params[:content])
+      redirect_to Gossip.find(params[:gossip_id])
+    else
+      render :edit
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
   def destroy
+    @comment = Comment.find(params[:id])
+    @gossip_id = @comment.gossip_id
     @comment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to Gossip.find(@gossip_id)
   end
+end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+private
+
+def comment_params
+  params.require(:comment).permit(:content, :gossip_id,  :comment_id)
 end

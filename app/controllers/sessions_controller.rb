@@ -4,6 +4,12 @@ class SessionsController < ApplicationController
     
   end
 
+  def show
+    session.delete(:user_id)
+    redirect_to '/'
+    
+  end
+
   def create
     @user = User.find_by(email: params[:email])
 

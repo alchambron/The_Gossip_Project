@@ -13,7 +13,10 @@ class CommentsController < ApplicationController
 
   def create
     puts params
-    @comment = Comment.new(content: params[:content], user_id: User.all.sample.id, gossip_id: params[:gossip_id]) # avec xxx qui sont les données obtenues à partir du formulaire
+    @comment = Comment.new(
+      content: params[:content],
+      user_id: session[:user_id],
+      gossip_id: params[:gossip_id]) # avec xxx qui sont les données obtenues à partir du formulaire
 
     if @comment.save # essaie de sauvegarder en base @gossip
       puts params

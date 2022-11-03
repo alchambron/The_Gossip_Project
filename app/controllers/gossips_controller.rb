@@ -14,7 +14,10 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new(title: params[:title], content: params[:content], user_id: rand(1..10))
+    @gossip = Gossip.new(
+      title: params[:title],
+      content: params[:content],
+      user_id: session[:user_id])
 
     if @gossip.save
       puts 'IT WWWORRRKKKKSSS'

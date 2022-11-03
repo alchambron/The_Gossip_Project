@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
 
   get '/', to: 'house#home'
   get '/contact', to: 'house#contact'

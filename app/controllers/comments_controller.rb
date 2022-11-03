@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create]
   
   def index
   end
@@ -54,6 +55,14 @@ end
 
 private
 
-def comment_params
-  params.require(:comment).permit(:content, :gossip_id,  :comment_id)
-end
+  def comment_params
+    params.require(:comment).permit(:content, :gossip_id,  :comment_id)
+  end
+
+  def authenticate_user
+    unless session[:user_id]
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+

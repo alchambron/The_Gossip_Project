@@ -11,7 +11,7 @@
 
 <div class="container-fluid"><%#  Creating the different card %> 
   <div class="d-flex justify-content-center row mx-2 row-cols-5">
-    <% @gossips.each do |gossip| %> 
+    <% @gossip.sort.each do |gossip| %> 
       <div class="col card mx-5 my-5 container-fluid" style="width: 18rem;">
         <div class="card-body card-deck">
           <h5 class="card-title">Gossip n°<%= gossip.id  %></h5><%#  Show the id of each gossip %>

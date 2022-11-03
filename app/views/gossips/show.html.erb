@@ -5,13 +5,16 @@
 <%# Creating the differents link of the user, to access their pages %>
 <div class="mx-4">
   
-<h4>Ecrit par <a href="/users/<%= @gossips.user.id %>"><%= @gossips.user.first_name%></a></h2>
-<h6>Ville de l'auteur : <a href="/cities/<%=@gossips.user.city.id%>"><%= @gossips.user.city.name %></a></h6>
+<h4>Ecrit par <a href="/users/<%= @gossip.user.id %>"><%= @gossip.user.first_name%></a></h2>
+<h6>Ville de l'auteur : <a href="/cities/<%=@gossip.user.city.id%>"><%= @gossip.user.city.name %></a></h6>
 <hr>
-<h5><p>Titre: <%= @gossips.title %></p></h5>
-<p><%= @gossips.content %></p>
+<h5><p>Titre: <%= @gossip.title %></p></h5>
+<p><%= @gossip.content %></p>
 <hr>
-<p>Date de création : <%= @gossips.created_at  %></p>
+<p>Date de création : <%= @gossip.created_at  %></p>
 <hr>
-<a href="/gossips/<%=@gossips.id%>/edit">Editer votre Gossip</a>
+<a href="/gossips/<%=@gossip.id%>/edit">Editer votre Gossip</a>
+<p><%= button_to "Editer Gossip", edit_gossip_path, :method => "get"%></p>
+<p><%= button_to "Delete Gossip", gossip_path(@gossip), :method => "delete" %></p>
+
 </div>

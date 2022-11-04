@@ -1,4 +1,4 @@
-# Project - 31/10/2022 - THP - Week 6 - Day 1 / Validant
+# Project - 04/11/2022 - THP - Week 6 - Day 1 / Validant
 
 ## The Gossip Project
 

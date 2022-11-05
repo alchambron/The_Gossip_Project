@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   if @user.save
     puts 'it workkksss'
-    redirect_to '/'
+    redirect_to root_path
   else
     puts 'noooooo'
     render new_user_path

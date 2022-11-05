@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       puts 'yes'
       session[:user_id] = @user.id
-      redirect_to '/'
+      redirect_to root_path
     else
       puts 'no'
     end
